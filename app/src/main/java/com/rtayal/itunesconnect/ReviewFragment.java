@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.rtayal.itunesconnect.dummy.AppItem;
 import com.rtayal.itunesconnect.dummy.ReviewItem;
 
 import java.io.IOException;
@@ -27,11 +28,11 @@ import okhttp3.Call;
  */
 public class ReviewFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
+    private static final String ARG_App = "app-item";
+
     private OnListFragmentInteractionListener mListener;
+
+    private AppItem appItem;
 
     private ArrayList<ReviewItem> items = new ArrayList<>();
 
@@ -46,10 +47,10 @@ public class ReviewFragment extends Fragment {
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ReviewFragment newInstance(int columnCount) {
+    public static ReviewFragment newInstance(AppItem appItem) {
         ReviewFragment fragment = new ReviewFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_COLUMN_COUNT, columnCount);
+        args.putSerializable(ARG_App, appItem);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,7 +60,7 @@ public class ReviewFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
+            appItem = (AppItem) getArguments().getSerializable(ARG_App);
         }
     }
 
@@ -68,7 +69,7 @@ public class ReviewFragment extends Fragment {
                              Bundle savedInstanceState) {
         recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_review_list, container, false);
 
-        new ServiceCaller().getReviews("com.rtayal.ChatApp", "US", new CallbackOnMain() {
+        new ServiceCaller().getReviews(appItem.bundle_id, "US", new CallbackOnMain() {
             @Override
             public void onFailure(Call call, IOException e) {
                 Log.e("error: ", e.toString());

@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     public void onListFragmentInteraction(AppItem item) {
         Log.i("Item", item.toString());
         Intent intent = new Intent(MainActivity.this, AppDetailActivity.class);
+        intent.putExtra("app-item", item);
         startActivity(intent);
     }
 }

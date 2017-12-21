@@ -5,47 +5,27 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.001669">
+      <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.001575">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.001278">
+      <testcase classname="fastlane.lanes" name="1: default_platform" time="0.001389">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: increment_version_code" time="0.056613">
+      <testcase classname="fastlane.lanes" name="2: increment_version_code" time="0.035543">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: gradle" time="2.540019">
+      <testcase classname="fastlane.lanes" name="3: gradle" time="2.244813">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: gradle" time="7.212069">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="5: upload_to_play_store" time="8.595135">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="6: Switch to android do_git lane" time="0.001674">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="7: git_commit" time="0.106089">
-        
-      </testcase>
-    
-      
-      <testcase classname="fastlane.lanes" name="8: push_to_git_remote" time="2.303628">
+      <testcase classname="fastlane.lanes" name="4: gradle" time="1.883348">
         
       </testcase>
     
