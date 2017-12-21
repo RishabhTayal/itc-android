@@ -6,7 +6,7 @@ android {
         applicationId "com.rtayal.itunesconnect"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 14
+        versionCode 15
         versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
