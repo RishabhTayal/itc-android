@@ -7,6 +7,7 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -60,6 +61,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Boolean isUserLoggedIn = MyApplication.sharedPreferences().getBoolean(Helper.SharedPrefLoggedInKey, false);
+        if (isUserLoggedIn) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
+
         // Set up the login form.
         mEmailView = findViewById(R.id.email);
         populateAutoComplete();
@@ -187,7 +195,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     Log.i("response: ", response);
                     HashMap<String, Object> result = new Gson().fromJson(response, new TypeToken<HashMap<String, Object>>() {
                     }.getType());
-                    if ((Boolean)result.get("success") == true) {
+                    if ((Boolean) result.get("success") == true) {
+                        SharedPreferences.Editor editor = MyApplication.sharedPreferences().edit();
+                        editor.putBoolean(Helper.SharedPrefLoggedInKey, true);
+                        editor.apply();
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     }
