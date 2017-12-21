@@ -28,6 +28,7 @@ platform :android do
     else
       commit_message = options[:commit_message]
     end
+    sh "git status"
     git_commit ({
       path: ".",
       message: commit_message
