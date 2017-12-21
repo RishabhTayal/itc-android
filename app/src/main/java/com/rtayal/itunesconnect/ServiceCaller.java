@@ -9,6 +9,7 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -19,11 +20,33 @@ public class ServiceCaller implements Callback {
 
     private static final OkHttpClient client = new OkHttpClient();
 
+    private static final String BASE_URL_CLOUD = "http://review-monitor.herokuapp.com";
+//    private static final String BASE_URL_CLOUD_DEV = "https://cottonbackend-dev.herokuapp.com";
+    private static final String BASE_URL_LOCAL = "http://10.0.2.2:4567";
+
     private CallbackOnMain callbackOnMain;
+
+    private static String BASE_URL() {
+        if (android.os.Debug.isDebuggerConnected()) {
+            return BASE_URL_LOCAL;
+        } else {
+            return BASE_URL_CLOUD;
+        }
+    }
+
+    void loginUser(CallbackOnMain callback) {
+        RequestBody reqbody = RequestBody.create(null, new byte[0]);
+        Request request = new Request.Builder()
+                .url(BASE_URL() + "/login?username=contact@appikon.com&password=AppikonSoft121")
+                .method("POST", reqbody)
+                .build();
+        callbackOnMain = callback;
+        client.newCall(request).enqueue(this);
+    }
 
     void getApps(CallbackOnMain callback) {
         Request request = new Request.Builder()
-                .url("http://review-monitor.herokuapp.com" + "/apps?username=contact@appikon.com&password=AppikonSoft121")
+                .url(BASE_URL() + "/apps?username=contact@appikon.com&password=AppikonSoft121")
                 .build();
         callbackOnMain = callback;
         client.newCall(request).enqueue(this);
