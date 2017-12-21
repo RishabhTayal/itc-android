@@ -1,5 +1,6 @@
 package com.rtayal.itunesconnect;
 
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -21,7 +22,7 @@ public class ServiceCaller implements Callback {
     private static final OkHttpClient client = new OkHttpClient();
 
     private static final String BASE_URL_CLOUD = "http://review-monitor.herokuapp.com";
-//    private static final String BASE_URL_CLOUD_DEV = "https://cottonbackend-dev.herokuapp.com";
+    //    private static final String BASE_URL_CLOUD_DEV = "https://cottonbackend-dev.herokuapp.com";
     private static final String BASE_URL_LOCAL = "http://10.0.2.2:4567";
 
     private CallbackOnMain callbackOnMain;
@@ -34,10 +35,10 @@ public class ServiceCaller implements Callback {
         }
     }
 
-    void loginUser(CallbackOnMain callback) {
+    void loginUser(String username, String password, CallbackOnMain callback) {
         RequestBody reqbody = RequestBody.create(null, new byte[0]);
         Request request = new Request.Builder()
-                .url(BASE_URL() + "/login?username=contact@appikon.com&password=AppikonSoft121")
+                .url(BASE_URL() + "/login?username=" + username + "&password=" + password)
                 .method("POST", reqbody)
                 .build();
         callbackOnMain = callback;
@@ -45,8 +46,11 @@ public class ServiceCaller implements Callback {
     }
 
     void getApps(CallbackOnMain callback) {
+        SharedPreferences preferences = MyApplication.sharedPreferences();
+        String email = preferences.getString(Helper.SharedPrefUserNameKey, "");
+        String password = preferences.getString(Helper.SharedPrefPasswordKey, "");
         Request request = new Request.Builder()
-                .url(BASE_URL() + "/apps?username=contact@appikon.com&password=AppikonSoft121")
+                .url(BASE_URL() + "/apps?username=" + email + "&password=" + password)
                 .build();
         callbackOnMain = callback;
         client.newCall(request).enqueue(this);

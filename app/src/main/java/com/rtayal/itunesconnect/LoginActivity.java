@@ -28,6 +28,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -151,8 +152,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        final String email = mEmailView.getText().toString();
+        final String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -183,7 +184,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            new ServiceCaller().loginUser(new CallbackOnMain() {
+            new ServiceCaller().loginUser(email, password, new CallbackOnMain() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     Log.i("response: ", e.toString());
@@ -193,15 +194,25 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 @Override
                 public void onResponse(Call call, String response) throws IOException {
                     Log.i("response: ", response);
-                    HashMap<String, Object> result = new Gson().fromJson(response, new TypeToken<HashMap<String, Object>>() {
-                    }.getType());
-                    if ((Boolean) result.get("success") == true) {
-                        SharedPreferences.Editor editor = MyApplication.sharedPreferences().edit();
-                        editor.putBoolean(Helper.SharedPrefLoggedInKey, true);
-                        editor.apply();
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
+                    try {
+                        HashMap<String, Object> result = new Gson().fromJson(response, new TypeToken<HashMap<String, Object>>() {
+                        }.getType());
+                        if ((Boolean) result.get("success") == true) {
+                            SharedPreferences.Editor editor = MyApplication.sharedPreferences().edit();
+                            editor.putBoolean(Helper.SharedPrefLoggedInKey, true);
+                            editor.putString(Helper.SharedPrefUserNameKey, email);
+                            editor.putString(Helper.SharedPrefPasswordKey, password);
+                            editor.apply();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+                    } catch (Exception e) {
+                        Log.i("Exception", e.toString());
+//                        if (e.toString().contains("<title>Spaceship::Client::InvalidUserCredentialsError at &#x2F;login</title>")) {
+                            Toast.makeText(LoginActivity.this, "Invalid Username Password", Toast.LENGTH_SHORT).show();
+//                        }
                     }
+
                     showProgress(false);
                 }
             });

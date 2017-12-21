@@ -7,5 +7,6 @@ package com.rtayal.itunesconnect;
 public class Helper {
     public static String SharedPrefKey = "com.rtayal.itunesconnect";
     public static String SharedPrefLoggedInKey = "isUserLoggedIn";
-
+    public static String SharedPrefUserNameKey = "usernameKey";
+    public static String SharedPrefPasswordKey = "passwordKey";
 }
