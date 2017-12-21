@@ -30,7 +30,7 @@ platform :android do
         "android.injected.signing.key.password" => "gotohell",
         })
     upload_to_play_store(json_key: 'play-store.json', track: 'beta')
-    do_git(commit_message: 'Uploaded to play store')
+    do_git(commit_message: 'Uploaded to play store by fastlane. 🚀')
   end
 
   desc "Git commit command"

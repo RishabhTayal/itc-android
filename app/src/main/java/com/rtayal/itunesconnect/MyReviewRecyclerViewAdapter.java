@@ -11,11 +11,6 @@ import com.rtayal.itunesconnect.dummy.ReviewItem;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MyReviewRecyclerViewAdapter extends RecyclerView.Adapter<MyReviewRecyclerViewAdapter.ViewHolder> {
 
     private final List<ReviewItem> mValues;
@@ -36,8 +31,8 @@ public class MyReviewRecyclerViewAdapter extends RecyclerView.Adapter<MyReviewRe
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
-        holder.mContentView.setText(mValues.get(position).title);
+        holder.titleView.setText(mValues.get(position).title);
+        holder.reviewView.setText(mValues.get(position).review);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,20 +53,20 @@ public class MyReviewRecyclerViewAdapter extends RecyclerView.Adapter<MyReviewRe
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
-        public final TextView mContentView;
+        public final TextView titleView;
+        public final TextView reviewView;
         public ReviewItem mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.id);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            titleView = view.findViewById(R.id.title);
+            reviewView = view.findViewById(R.id.review);
         }
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            return super.toString() + " '" + titleView.getText() + "'";
         }
     }
 }
