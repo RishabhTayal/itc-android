@@ -1,6 +1,7 @@
 package com.rtayal.itunesconnect;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 
 /**
@@ -10,11 +11,13 @@ import android.content.SharedPreferences;
 public class MyApplication extends Application {
 
     static MyApplication mainApplication;
+    public static Context context;
 
     @Override
     public void onCreate() {
         super.onCreate();
         mainApplication = this;
+        context = getApplicationContext();
     }
 
     public static SharedPreferences sharedPreferences() {

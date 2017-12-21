@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (id == R.id.action_share) {
 //            Answers.getInstance().logInvite(new InviteEvent());
-            String shareBody = "Check out iTune Connect for your smartphone. Download now from "; //+ Helper.AppDownloadLink;
+            String shareBody = "Check out iTunes Connect for your smart phone. Download now from "; //+ Helper.AppDownloadLink;
             Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
             sharingIntent.setType("text/plain");
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
