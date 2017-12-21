@@ -11,11 +11,14 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.rtayal.itunesconnect.dummy.AppItem;
+
+public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -96,5 +99,12 @@ public class MainActivity extends AppCompatActivity {
                     .setNegativeButton("Cancel", null).show();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onListFragmentInteraction(AppItem item) {
+        Log.i("Item", item.toString());
+        Intent intent = new Intent(MainActivity.this, AppDetailActivity.class);
+        startActivity(intent);
     }
 }

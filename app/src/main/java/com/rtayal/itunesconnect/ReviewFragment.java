@@ -4,13 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.rtayal.itunesconnect.dummy.AppItem;
+import com.rtayal.itunesconnect.dummy.ReviewItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import okhttp3.Call;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ItemFragment extends Fragment {
+public class ReviewFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -32,7 +33,7 @@ public class ItemFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
-    private ArrayList<AppItem> apps = new ArrayList<AppItem>();
+    private ArrayList<ReviewItem> items = new ArrayList<>();
 
     private RecyclerView recyclerView;
 
@@ -40,13 +41,13 @@ public class ItemFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public ItemFragment() {
+    public ReviewFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static ItemFragment newInstance(int columnCount) {
-        ItemFragment fragment = new ItemFragment();
+    public static ReviewFragment newInstance(int columnCount) {
+        ReviewFragment fragment = new ReviewFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         fragment.setArguments(args);
@@ -65,26 +66,26 @@ public class ItemFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_item_list, container, false);
+        recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_review_list, container, false);
 
-        new ServiceCaller().getApps(new CallbackOnMain() {
+        new ServiceCaller().getReviews("com.rtayal.ChatApp", "US", new CallbackOnMain() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                Log.e("error: ", e.toString());
             }
 
             @Override
             public void onResponse(Call call, String response) throws IOException {
-                System.out.print(response);
-                List<AppItem> appItems = new Gson().fromJson(response, new TypeToken<ArrayList<AppItem>>() {
+                Log.i("reviews: ", response);
+                List<ReviewItem> appItems = new Gson().fromJson(response, new TypeToken<ArrayList<ReviewItem>>() {
                 }.getType());
-                apps.clear();
-                apps.addAll(appItems);
+                items.clear();
+                items.addAll(appItems);
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
         });
 
-        recyclerView.setAdapter(new MyItemRecyclerViewAdapter(apps, mListener));
+        recyclerView.setAdapter(new MyReviewRecyclerViewAdapter(items, mListener));
 
         return recyclerView;
     }
@@ -119,6 +120,6 @@ public class ItemFragment extends Fragment {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(AppItem item);
+        void onListFragmentInteraction(ReviewItem item);
     }
 }

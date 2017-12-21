@@ -56,6 +56,17 @@ public class ServiceCaller implements Callback {
         client.newCall(request).enqueue(this);
     }
 
+    void getReviews(String bundle_id, String storeFront, CallbackOnMain callback) {
+        SharedPreferences preferences = MyApplication.sharedPreferences();
+        String email = preferences.getString(Helper.SharedPrefUserNameKey, "");
+        String password = preferences.getString(Helper.SharedPrefPasswordKey, "");
+        Request request = new Request.Builder()
+                .url(BASE_URL() + "/ratings?username=" + email + "&password=" + password + "&bundle_id=" + bundle_id + "&store_front=" + storeFront)
+                .build();
+        callbackOnMain = callback;
+        client.newCall(request).enqueue(this);
+    }
+
     @Override
     public void onResponse(final Call call, final Response response) throws IOException {
         final String body = response.body().string();
