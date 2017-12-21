@@ -1,0 +1,24 @@
+min_fastlane_version("2.70.1")
+
+default_platform(:android)
+
+platform :android do
+
+  desc "Runs all the tests"
+  lane :test do
+    gradle(task: "test")
+  end
+
+  desc "Submit a new Beta Build to Crashlytics Beta"
+  lane :beta do
+    gradle(task: "assembleRelease")
+    crashlytics(api_token: "02d3f7db22ac1a3e538528547a694d5230eb8278", build_secret: "af6ede98bc0742057c556b0ed733e4c57ae435cd7cc81f516bb2b4e456b7e234")
+  end
+
+  desc "Deploy a new version to the Google Play"
+  lane :deploy do
+    gradle(task: "assembleRelease")
+    upload_to_play_store
+  end
+
+end
