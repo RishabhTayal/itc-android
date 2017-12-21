@@ -21,4 +21,17 @@ platform :android do
     upload_to_play_store
   end
 
+  desc "Git commit command"
+  lane :do_git do |options|
+    if options[:commit_message] == nil 
+      commit_message = prompt(text: "Enter Commit message", boolean: false)
+    else
+      commit_message = options[:commit_message]
+    end
+    git_commit ({
+      path: ".",
+      message: commit_message
+    })
+    push_to_git_remote
+  end
 end
