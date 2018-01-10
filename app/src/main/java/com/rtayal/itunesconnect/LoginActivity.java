@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
@@ -195,17 +196,21 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 public void onResponse(Call call, String response) throws IOException {
                     Log.i("response: ", response);
                     try {
-                        HashMap<String, Object> result = new Gson().fromJson(response, new TypeToken<HashMap<String, Object>>() {
+                        ArrayList<HashMap<String, Object>> result = new Gson().fromJson(response, new TypeToken<ArrayList<HashMap<String, Object>>>() {
                         }.getType());
-                        if ((Boolean) result.get("success") == true) {
+                        for (HashMap<String, Object> account: result) {
                             SharedPreferences.Editor editor = MyApplication.sharedPreferences().edit();
                             editor.putBoolean(Helper.SharedPrefLoggedInKey, true);
                             editor.putString(Helper.SharedPrefUserNameKey, email);
                             editor.putString(Helper.SharedPrefPasswordKey, password);
-                            editor.putString(Helper.SharedPrefTeamIdKey, result.get("contentProviderId").toString());
+                            LinkedTreeMap contentProvider = (LinkedTreeMap) account.get("contentProvider");
+                            Double teamId = new Double(contentProvider.get("contentProviderId").toString());
+                            String teamIdString = String.format("%.0f", teamId);
+                            editor.putString(Helper.SharedPrefTeamIdKey, teamIdString);
                             editor.apply();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
+                            return;
                         }
                     } catch (Exception e) {
                         Log.i("Exception", e.toString());

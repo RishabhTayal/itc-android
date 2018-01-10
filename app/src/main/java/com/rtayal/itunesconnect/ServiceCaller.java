@@ -64,7 +64,7 @@ public class ServiceCaller implements Callback {
     void loginUser(String username, String password, CallbackOnMain callback) {
         RequestBody reqbody = RequestBody.create(null, new byte[0]);
         Request request = new Request.Builder()
-                .url(ServiceCaller.getBaseUrl() + "/login/v2")
+                .url(ServiceCaller.getBaseUrl() + "login/v2")
                 .method("POST", reqbody)
                 .addHeader("username", username)
                 .addHeader("password", password)
@@ -77,11 +77,12 @@ public class ServiceCaller implements Callback {
         SharedPreferences preferences = MyApplication.sharedPreferences();
         String email = preferences.getString(Helper.SharedPrefUserNameKey, "");
         String password = preferences.getString(Helper.SharedPrefPasswordKey, "");
+        String teamId = preferences.getString(Helper.SharedPrefTeamIdKey, "");
         Request request = new Request.Builder()
-                .url(ServiceCaller.getBaseUrl() + "/apps")
+                .url(ServiceCaller.getBaseUrl() + "apps")
                 .addHeader("username", email)
                 .addHeader("password", password)
-//                .addHeader()
+                .addHeader("team_id", teamId)
                 .build();
         callbackOnMain = callback;
         client.newCall(request).enqueue(this);
@@ -91,10 +92,12 @@ public class ServiceCaller implements Callback {
         SharedPreferences preferences = MyApplication.sharedPreferences();
         String email = preferences.getString(Helper.SharedPrefUserNameKey, "");
         String password = preferences.getString(Helper.SharedPrefPasswordKey, "");
+        String teamId = preferences.getString(Helper.SharedPrefTeamIdKey, "");
         Request request = new Request.Builder()
-                .url(ServiceCaller.getBaseUrl() + "/ratings?bundle_id=" + bundle_id + "&store_front=" + storeFront)
+                .url(ServiceCaller.getBaseUrl() + "ratings?bundle_id=" + bundle_id + "&store_front=" + storeFront)
                 .addHeader("username", email)
                 .addHeader("password", password)
+                .addHeader("team_id", teamId)
                 .build();
         callbackOnMain = callback;
         client.newCall(request).enqueue(this);
