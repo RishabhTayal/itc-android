@@ -1,4 +1,4 @@
-package com.rtayal.itunesconnect.dummy;
+package com.rtayal.itunesconnect.models;
 
 import java.util.HashMap;
 

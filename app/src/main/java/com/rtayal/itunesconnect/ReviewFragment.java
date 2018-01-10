@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.rtayal.itunesconnect.dummy.AppItem;
-import com.rtayal.itunesconnect.dummy.ReviewItem;
+import com.rtayal.itunesconnect.models.AppItem;
+import com.rtayal.itunesconnect.models.ReviewItem;
 
 import java.io.IOException;
 import java.util.ArrayList;

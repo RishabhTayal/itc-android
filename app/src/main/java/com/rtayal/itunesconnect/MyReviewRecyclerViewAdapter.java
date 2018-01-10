@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.rtayal.itunesconnect.ReviewFragment.OnListFragmentInteractionListener;
-import com.rtayal.itunesconnect.dummy.ReviewItem;
+import com.rtayal.itunesconnect.models.ReviewItem;
 
 import java.util.List;
 

@@ -202,6 +202,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                             editor.putBoolean(Helper.SharedPrefLoggedInKey, true);
                             editor.putString(Helper.SharedPrefUserNameKey, email);
                             editor.putString(Helper.SharedPrefPasswordKey, password);
+                            editor.putString(Helper.SharedPrefTeamIdKey, result.get("contentProviderId").toString());
                             editor.apply();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -216,6 +217,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     showProgress(false);
                 }
             });
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ServiceCaller.getBaseUrl().length() == 0) {
+        ServiceCaller.askForBaseUrl(this);
         }
     }
 

@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rtayal.itunesconnect.ItemFragment.OnListFragmentInteractionListener;
-import com.rtayal.itunesconnect.dummy.AppItem;
+import com.rtayal.itunesconnect.models.AppItem;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

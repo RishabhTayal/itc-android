@@ -9,4 +9,5 @@ public class Helper {
     public static String SharedPrefLoggedInKey = "isUserLoggedIn";
     public static String SharedPrefUserNameKey = "usernameKey";
     public static String SharedPrefPasswordKey = "passwordKey";
+    public static String SharedPrefTeamIdKey = "teamIdKey";
 }

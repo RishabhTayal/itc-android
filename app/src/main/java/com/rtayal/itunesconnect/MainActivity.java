@@ -16,7 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.rtayal.itunesconnect.dummy.AppItem;
+import com.rtayal.itunesconnect.models.AppItem;
 
 public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
 
@@ -52,6 +52,14 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
 
 //        BottomNavigationView navigation = findViewById(R.id.navigation);
 //        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (ServiceCaller.getBaseUrl().length() == 0) {
+            ServiceCaller.askForBaseUrl(this);
+        }
     }
 
     @Override

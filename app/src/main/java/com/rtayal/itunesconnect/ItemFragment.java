@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.rtayal.itunesconnect.dummy.AppItem;
+import com.rtayal.itunesconnect.models.AppItem;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,28 +67,36 @@ public class ItemFragment extends Fragment {
                              Bundle savedInstanceState) {
         recyclerView = (RecyclerView) inflater.inflate(R.layout.fragment_item_list, container, false);
 
-        new ServiceCaller().getApps(new CallbackOnMain() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, String response) throws IOException {
-                System.out.print(response);
-                List<AppItem> appItems = new Gson().fromJson(response, new TypeToken<ArrayList<AppItem>>() {
-                }.getType());
-                apps.clear();
-                apps.addAll(appItems);
-                recyclerView.getAdapter().notifyDataSetChanged();
-            }
-        });
-
         recyclerView.setAdapter(new MyItemRecyclerViewAdapter(apps, mListener));
 
         return recyclerView;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (ServiceCaller.getBaseUrl().length() == 0) {
+
+        } else {
+            new ServiceCaller().getApps(new CallbackOnMain() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, String response) throws IOException {
+                    System.out.print(response);
+                    List<AppItem> appItems = new Gson().fromJson(response, new TypeToken<ArrayList<AppItem>>() {
+                    }.getType());
+                    apps.clear();
+                    apps.addAll(appItems);
+                    recyclerView.getAdapter().notifyDataSetChanged();
+                }
+            });
+
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
