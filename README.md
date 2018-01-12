@@ -1,4 +1,4 @@
-# iTunes Connect Manager for Android, [iOS](https://github.com/RishabhTayal/ReviewMonitor/blob/master/README.md)
+# iTunes Connect Manager for Android, [iOS](https://github.com/RishabhTayal/ReviewMonitor)
 
 [![Version](https://img.shields.io/github/release/RishabhTayal/itc-android.svg)](https://github.com/RishabhTayal/itc-android/releases/latest)
 [![GitHub contributors](https://img.shields.io/github/contributors/RishabhTayal/itc-android.svg)](https://GitHub.com/RishabhTayal/itc-android/graphs/contributors/)
