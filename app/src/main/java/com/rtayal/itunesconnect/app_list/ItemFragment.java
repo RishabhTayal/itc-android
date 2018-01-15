@@ -1,4 +1,4 @@
-package com.rtayal.itunesconnect;
+package com.rtayal.itunesconnect.app_list;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.rtayal.itunesconnect.R;
+import com.rtayal.itunesconnect.helper.CallbackOnMain;
+import com.rtayal.itunesconnect.helper.ServiceCaller;
 import com.rtayal.itunesconnect.models.AppItem;
 
 import java.io.IOException;

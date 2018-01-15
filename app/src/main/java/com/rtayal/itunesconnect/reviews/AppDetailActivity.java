@@ -1,9 +1,10 @@
-package com.rtayal.itunesconnect;
+package com.rtayal.itunesconnect.reviews;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
+import com.rtayal.itunesconnect.R;
 import com.rtayal.itunesconnect.models.AppItem;
 import com.rtayal.itunesconnect.models.ReviewItem;
 

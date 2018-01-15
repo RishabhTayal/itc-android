@@ -1,4 +1,4 @@
-package com.rtayal.itunesconnect;
+package com.rtayal.itunesconnect.helper;
 
 /**
  * Created by rtayal on 12/21/17.

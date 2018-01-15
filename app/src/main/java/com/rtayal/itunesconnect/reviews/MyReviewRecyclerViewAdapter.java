@@ -1,4 +1,4 @@
-package com.rtayal.itunesconnect;
+package com.rtayal.itunesconnect.reviews;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.rtayal.itunesconnect.ReviewFragment.OnListFragmentInteractionListener;
+import com.rtayal.itunesconnect.R;
 import com.rtayal.itunesconnect.models.ReviewItem;
 
 import java.util.List;
@@ -14,9 +14,9 @@ import java.util.List;
 public class MyReviewRecyclerViewAdapter extends RecyclerView.Adapter<MyReviewRecyclerViewAdapter.ViewHolder> {
 
     private final List<ReviewItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final ReviewFragment.OnListFragmentInteractionListener mListener;
 
-    public MyReviewRecyclerViewAdapter(List<ReviewItem> items, OnListFragmentInteractionListener listener) {
+    public MyReviewRecyclerViewAdapter(List<ReviewItem> items, ReviewFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }

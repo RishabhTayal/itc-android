@@ -33,6 +33,11 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.google.gson.reflect.TypeToken;
+import com.rtayal.itunesconnect.app_list.MainActivity;
+import com.rtayal.itunesconnect.helper.CallbackOnMain;
+import com.rtayal.itunesconnect.helper.Helper;
+import com.rtayal.itunesconnect.helper.MyApplication;
+import com.rtayal.itunesconnect.helper.ServiceCaller;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.rtayal.itunesconnect;
+package com.rtayal.itunesconnect.helper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -32,19 +32,19 @@ public class ServiceCaller implements Callback {
 
     private CallbackOnMain callbackOnMain;
 
-    static String getBaseUrl() {
+    public static String getBaseUrl() {
         SharedPreferences preferences = MyApplication.sharedPreferences();
         String url = preferences.getString("base_url", "");
         return url;
     }
 
-    static void setBaseUrl(String url) {
+    public static void setBaseUrl(String url) {
         SharedPreferences.Editor editor = MyApplication.sharedPreferences().edit();
         editor.putString("base_url", url);
         editor.commit();
     }
 
-    static void askForBaseUrl(Activity activity) {
+    public static void askForBaseUrl(Activity activity) {
         AlertDialog.Builder builder = new AlertDialog.Builder((Context) activity);
 
         final EditText edittext = new EditText(activity);
@@ -61,7 +61,7 @@ public class ServiceCaller implements Callback {
         builder.show();
     }
 
-    void loginUser(String username, String password, CallbackOnMain callback) {
+    public void loginUser(String username, String password, CallbackOnMain callback) {
         RequestBody reqbody = RequestBody.create(null, new byte[0]);
         Request request = new Request.Builder()
                 .url(ServiceCaller.getBaseUrl() + "login/v2")
@@ -73,7 +73,7 @@ public class ServiceCaller implements Callback {
         client.newCall(request).enqueue(this);
     }
 
-    void getApps(CallbackOnMain callback) {
+    public void getApps(CallbackOnMain callback) {
         SharedPreferences preferences = MyApplication.sharedPreferences();
         String email = preferences.getString(Helper.SharedPrefUserNameKey, "");
         String password = preferences.getString(Helper.SharedPrefPasswordKey, "");
@@ -88,7 +88,7 @@ public class ServiceCaller implements Callback {
         client.newCall(request).enqueue(this);
     }
 
-    void getReviews(String bundle_id, String storeFront, CallbackOnMain callback) {
+    public void getReviews(String bundle_id, String storeFront, CallbackOnMain callback) {
         SharedPreferences preferences = MyApplication.sharedPreferences();
         String email = preferences.getString(Helper.SharedPrefUserNameKey, "");
         String password = preferences.getString(Helper.SharedPrefPasswordKey, "");
@@ -127,10 +127,4 @@ public class ServiceCaller implements Callback {
             }
         });
     }
-}
-
-interface CallbackOnMain {
-    void onFailure(Call call, IOException e);
-
-    void onResponse(Call call, String response) throws IOException;
 }

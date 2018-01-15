@@ -1,4 +1,4 @@
-package com.rtayal.itunesconnect;
+package com.rtayal.itunesconnect.helper;
 
 import android.app.Application;
 import android.content.Context;

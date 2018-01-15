@@ -1,4 +1,4 @@
-package com.rtayal.itunesconnect;
+package com.rtayal.itunesconnect.app_list;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rtayal.itunesconnect.ItemFragment.OnListFragmentInteractionListener;
+import com.rtayal.itunesconnect.R;
+import com.rtayal.itunesconnect.helper.MyApplication;
 import com.rtayal.itunesconnect.models.AppItem;
 import com.squareup.picasso.Picasso;
 
@@ -16,9 +17,9 @@ import java.util.List;
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
     private final List<AppItem> mValues;
-    private final OnListFragmentInteractionListener mListener;
+    private final ItemFragment.OnListFragmentInteractionListener mListener;
 
-    public MyItemRecyclerViewAdapter(List<AppItem> items, OnListFragmentInteractionListener listener) {
+    public MyItemRecyclerViewAdapter(List<AppItem> items, ItemFragment.OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
