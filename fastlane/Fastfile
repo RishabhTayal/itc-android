@@ -25,9 +25,9 @@ platform :android do
       # print_command: false,
       properties: {
         "android.injected.signing.store.file" => "keystore",
-        "android.injected.signing.store.password" => "gotohell",
+        "android.injected.signing.store.password" => "mykeystorepassword",
         "android.injected.signing.key.alias" => "itc",
-        "android.injected.signing.key.password" => "gotohell",
+        "android.injected.signing.key.password" => "myitcpassword",
         })
     upload_to_play_store(json_key: 'play-store.json', track: 'beta')
     do_git(commit_message: 'Uploaded to play store by fastlane. 🚀')
