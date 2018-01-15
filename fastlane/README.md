@@ -33,11 +33,6 @@ Submit a new Beta Build to Crashlytics Beta
 fastlane android deploy
 ```
 Deploy a new version to the Google Play
-### android do_git
-```
-fastlane android do_git
-```
-Git commit command
 
 ----
 
