@@ -17,7 +17,7 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do
-    increment_version_code
+    new_version = increment_version_code
     gradle(task: 'clean')
     gradle(
       task: "assemble",
@@ -30,11 +30,11 @@ platform :android do
         "android.injected.signing.key.password" => "myitcpassword",
         })
     upload_to_play_store(json_key: 'play-store.json', track: 'beta')
-    do_git(commit_message: 'Uploaded to play store by fastlane. 🚀')
+    do_git(commit_message: 'Uploaded to play store by fastlane. 🚀', version: new_version)
   end
 
   desc "Git commit command"
-  lane :do_git do |options|
+  private_lane :do_git do |options|
     if options[:commit_message] == nil 
       commit_message = prompt(text: "Enter Commit message", boolean: false)
     else
@@ -46,5 +46,6 @@ platform :android do
       message: commit_message
     })
     push_to_git_remote
+    add_git_tag(tag: options[:version])
   end
 end
