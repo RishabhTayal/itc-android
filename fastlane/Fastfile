@@ -47,5 +47,6 @@ platform :android do
     })
     push_to_git_remote
     add_git_tag(tag: options[:version].to_s)
+    push_git_tags
   end
 end
