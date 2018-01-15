@@ -8,14 +8,14 @@ import com.rtayal.itunesconnect.R;
 import com.rtayal.itunesconnect.models.AppItem;
 import com.rtayal.itunesconnect.models.ReviewItem;
 
-public class AppDetailActivity extends AppCompatActivity implements ReviewFragment.OnListFragmentInteractionListener {
+public class AppReviewsActivity extends AppCompatActivity implements ReviewFragment.OnListFragmentInteractionListener {
 
     private AppItem appItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_app_detail);
+        setContentView(R.layout.activity_app_reviews);
 
         appItem = (AppItem) getIntent().getSerializableExtra("app-item");
 

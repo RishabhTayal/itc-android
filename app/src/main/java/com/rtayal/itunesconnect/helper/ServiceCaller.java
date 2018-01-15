@@ -103,6 +103,22 @@ public class ServiceCaller implements Callback {
         client.newCall(request).enqueue(this);
     }
 
+    public void getTesters(String bundle_id, CallbackOnMain callback) {
+        SharedPreferences preferences = MyApplication.sharedPreferences();
+        String email = preferences.getString(Helper.SharedPrefUserNameKey, "");
+        String password = preferences.getString(Helper.SharedPrefPasswordKey, "");
+        String teamId = preferences.getString(Helper.SharedPrefTeamIdKey, "");
+        Request request = new Request.Builder()
+                .url(ServiceCaller.getBaseUrl() + "testers?bundle_id=" + bundle_id)
+                .addHeader("username", email)
+                .addHeader("password", password)
+                .addHeader("team_id", teamId)
+                .build();
+        callbackOnMain = callback;
+        client.newCall(request).enqueue(this);
+
+    }
+
     @Override
     public void onResponse(final Call call, final Response response) throws IOException {
         final String body = response.body().string();

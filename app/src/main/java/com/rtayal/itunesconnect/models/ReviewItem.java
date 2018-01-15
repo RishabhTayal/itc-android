@@ -1,8 +1,9 @@
 package com.rtayal.itunesconnect.models;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class ReviewItem {
+public class ReviewItem implements Serializable {
     public final String id;
     public final String title;
     public final String rating;

@@ -17,11 +17,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.rtayal.itunesconnect.R;
+import com.rtayal.itunesconnect.app_detail.AppDetailActivity;
 import com.rtayal.itunesconnect.helper.Helper;
 import com.rtayal.itunesconnect.helper.MyApplication;
 import com.rtayal.itunesconnect.helper.ServiceCaller;
 import com.rtayal.itunesconnect.models.AppItem;
-import com.rtayal.itunesconnect.reviews.AppDetailActivity;
 
 public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
 
