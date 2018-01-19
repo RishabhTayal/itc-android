@@ -23,6 +23,9 @@ import com.rtayal.itunesconnect.helper.MyApplication;
 import com.rtayal.itunesconnect.helper.ServiceCaller;
 import com.rtayal.itunesconnect.models.AppItem;
 
+import hotchemi.android.rate.AppRate;
+import hotchemi.android.rate.OnClickButtonListener;
+
 public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener {
 
 
@@ -54,6 +57,19 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, ItemFragment.newInstance(1));
         transaction.commit();
+
+        AppRate.with(this)
+                .setInstallDays(1)
+                .setLaunchTimes(2)
+                .setRemindInterval(2)
+                .setOnClickButtonListener(new OnClickButtonListener() {
+                    @Override
+                    public void onClickButton(int which) {
+
+                    }
+                })
+                .monitor();
+        AppRate.showRateDialogIfMeetsConditions(this);
 
 //        BottomNavigationView navigation = findViewById(R.id.navigation);
 //        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
