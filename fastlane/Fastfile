@@ -33,6 +33,19 @@ platform :android do
     do_git(commit_message: 'Uploaded to play store by fastlane. 🚀', version: new_version)
   end
 
+  desc "Promote beta track to production"
+  lane :promote_to_prod_track do
+    upload_to_play_store(
+      track_promote_to: 'production', 
+      json_key: 'play-store.json',
+      skip_upload_apk: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true,
+      track: 'beta'
+      )
+  end
+
   desc "Git commit command"
   private_lane :do_git do |options|
     if options[:commit_message] == nil 
